@@ -1,6 +1,7 @@
 #python file_converter.py -h
 #python file_converter.py <path-to-input-dir> -o <path-to-output-dir>
 #!/usr/bin/env python
+
 import os
 import pyvista as pv
 import argparse
@@ -19,15 +20,9 @@ def convertFiles(indir, outdir):
         print("Copying file:", basename)
         basename = os.path.splitext(basename)[0]
         print("Fle name:", basename)
-        othermesh = examples.load_uniform()
-        legend_entries = []
-        legend_entries.append(['Liver converted', 'w'])
-        legend_entries.append(['External marker', 'k'])
         plotter = pv.Plotter()
         _ = plotter.add_mesh(mesh)
-        _ = plotter.add_mesh(othermesh, 'k')
-        _ = plotter.add_legend(legend_entries)
-        _ = plotter.export_obj(outdir+"conv_"+basename+".obj")
+        _ = plotter.export_obj(outdir+basename+".obj")
         ret +=1
         plotter.show()
 
